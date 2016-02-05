@@ -1,0 +1,74 @@
+{
+  "name": "logml",
+  "description": "Development of an integrated logical modelling tool from the beginning steps of logical graph modelling to the final simulations outputs.",
+  "version": "0.0.0",
+  "author": "Jean Ponchon <jean.ponchon@novadiscovery.com>",
+  "contributors": [
+    "Claudio Monteiro Sousa <claudio.monteiro@novadiscovery.com>",
+    "Julien Wan <julien.wan@novadiscovery.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nodys/logml.git"
+  },
+  "license": "MIT",
+  "main": "src/index",
+  "bin": {
+    "logml": "./bin/logml.js"
+  },
+  "engines": {
+    "node": ">= 4"
+  },
+  "scripts": {
+    "test": "mocha",
+    "spec": "mocha --reporter spec",
+    "monitor": "mocha --reporter spec --watch",
+    "debugtest": "mocha --debug-brk --reporter spec",
+    "coverage": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- -R spec ./test/index.js",
+    "standard": "./node_modules/.bin/standard"
+  },
+  "dependencies": {
+    "babel-plugin-transform-runtime": "^6.4.3",
+    "babel-preset-es2015": "^6.3.13",
+    "babelify": "^7.2.0",
+    "bluebird": "^3.2.1",
+    "browserify": "^13.0.0",
+    "cheerio": "^0.20.0",
+    "chokidar": "^1.2.0",
+    "cli-color": "^1.1.0",
+    "co": "^4.6.0",
+    "color-js": "^1.0.3",
+    "commander": "^2.9.0",
+    "concat-stream": "^1.5.0",
+    "cssy": "^2.0.2",
+    "d3": "^3.5.14",
+    "debug": "^2.2.0",
+    "domready": "^1.0.8",
+    "elastomer": "^2.0.0",
+    "express": "^4.13.4",
+    "express-promise-router": "^1.0.0",
+    "extend": "^3.0.0",
+    "fs-extra": "^0.26.5",
+    "fs-extra-promise": "^0.3.0",
+    "htmly": "^1.1.1",
+    "lodash.debounce": "^4.0.1",
+    "lodash.deburr": "^3.1.2",
+    "lodash.pick": "^4.0.1",
+    "lodash.template": "^4.0.2",
+    "lrio": "^1.2.1",
+    "minifyify": "^7.2.1",
+    "mocha": "^2.3.3",
+    "open": "0.0.5",
+    "sprintf-js": "^1.0.3"
+  },
+  "devDependencies": {
+    "expect.js": "*",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "standard": "^5.3.1"
+  },
+  "keywords": ["logical", "modeling", "graphml"],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

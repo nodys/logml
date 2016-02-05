@@ -1,0 +1,40 @@
+<div id="outer" vertical layout border fit>
+  <header toolbar horizontal layout>
+    <nova-button outlined nv-on-click="handleActivateAll" nv-unless="model.state.allAreActivated">Select All</nova-button>
+    <nova-button outlined nv-on-click="handleDesactivateAll" nv-if="model.state.allAreActivated">Deselect All</nova-button>
+    <div flex></div>
+    <nova-button outlined nv-flag-activated="model.state.fusion" nv-on-click="handleToogleFusion">Fusion</nova-button>
+  </header>
+  <div horizontal layout border flex>
+    <header toolbar vertical layout>
+      <div flex overflow id="nodeButtonOwner">
+        <div
+          horizontal layout spaced
+          class="nodeButton"
+          nv-each-node="model.state.nodes"
+          nv-on-click="handleItemClick"
+          nv-flag-activated="node.activated">
+            <div class="square" nv-style-background-color="node.color" nv-style-border-style="node.lstyle"></div>
+            <div flex ellipsis>
+              {{node.label}}
+            </div>
+          </div>
+      </div>
+    </header>
+    <div vertical layout flex>
+      <div flex id="plot" relative nv-flag-fusion="model.state.fusion" overflow></div>
+      <div id="legend" layout horizontal wrap nv-if="model.state.fusion">
+        <div
+          layout horizontal spaced
+          nv-each-node="model.activatedNodes"
+          nv-on-click="handleLegendClick"
+          nv-flag-activated="node.activated">
+          <div class="square" nv-style-background-color="node.color" nv-style-border-style="node.lstyle"></div>
+          <div flex ellipsis>
+            {{node.label}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

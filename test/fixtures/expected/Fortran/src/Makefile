@@ -1,0 +1,64 @@
+# ============================================================================
+# Name        : Makefile
+# Author      : Novadiscovery
+# Copyright   : Copyright (C) Novadiscovery. MIT
+# Description : Makefile to compile the current code for Logml
+# HOW TO USE  : should be used by another, central Makefile
+# ============================================================================
+
+# Change this line if you are using a different Fortran compiler
+# -0fast                  : Optimize for speed disregarding exact standards compliance
+# -ggdb                   : Generate debug information in default extended format
+# -Wall                   : Enable most warning messages
+# -fmax-errors=x          : Maximum number of errors to report
+# -Werror                 : Treat all warnings as errors
+# -ffree-form             : Assume that the source file is free form
+# -ffree-line-length-none : Allow arbitrary character line width in free mode
+# -w                      : no warning at all
+# -c                      : option is needed to compile a file without linking
+# -J                      : option tells where to put the compiled modules
+# -I                      : option tells where to find the compiled modules
+COMPILE  = @gfortran -Ofast -ggdb -Wall -fmax-errors=1 -Werror -ffree-form -ffree-line-length-none -pedantic
+#COMPILE_NO_WARNING = @gfortran -Ofast -ggdb -w -fmax-errors=1 -Werror -ffree-form -ffree-line-length-none
+
+
+# defining file structure and compilation from the current folder
+BIN         = ./bin
+TMP         = ./tmp
+COMPILE_LIB = $(COMPILE) -J$(BIN) -c
+COMPILE_EXE = $(COMPILE) -I$(BIN)
+LIB         = ./
+
+# =============================================================================
+# This part deals with the refactored version of Logml
+# =============================================================================
+
+.PHONY: compile run
+
+all: data
+
+# Generate ./bin folder if not present
+$(BIN)/:
+	@mkdir -p bin
+
+# Compile the libraries containing constants & functions used by the logical model
+$(BIN)/constants.o: $(BIN) constants.f95
+	$(COMPILE_LIB) -o $(BIN)/constants.o constants.f95
+
+$(BIN)/lib_functions.o: $(LIB)lib_functions.f95
+	$(COMPILE_LIB) -o $(BIN)/lib_functions.o $(LIB)lib_functions.f95
+
+$(BIN)/upd_edges.o: upd_edges.f95 $(BIN)/constants.o $(BIN)/lib_functions.o
+	$(COMPILE_LIB) -o $(BIN)/upd_edges.o upd_edges.f95 $(BIN)/constants.o $(BIN)/lib_functions.o
+
+$(BIN)/upd_nodes.o: upd_nodes.f95 $(BIN)/constants.o $(BIN)/lib_functions.o
+	$(COMPILE_LIB) -o $(BIN)/upd_nodes.o upd_nodes.f95 $(BIN)/constants.o $(BIN)/lib_functions.o
+
+# Compile the logical model
+$(BIN)/cu_logical: cu_logical.f95 $(BIN)/constants.o $(BIN)/lib_functions.o $(BIN)/upd_edges.o $(BIN)/upd_nodes.o
+	$(COMPILE_EXE) -o $(BIN)/cu_logical cu_logical.f95 $(BIN)/constants.o $(BIN)/lib_functions.o $(BIN)/upd_edges.o $(BIN)/upd_nodes.o
+
+# Generate csv: 'make data'
+data: $(BIN)/cu_logical
+	@cat constants.f95 | grep "NODE_" | cut -d:  -f3 | cut -d= -f-1 | cut -d_ -f2-5 | xargs | sed -e 's/ /,/g'
+	@$(BIN)/cu_logical

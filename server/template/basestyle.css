@@ -1,0 +1,28 @@
+body {
+  font: 10px sans-serif;
+}
+
+#loading {
+  text-align: center;
+  font-size: 2rem;
+  color: #ccc;
+  padding: 6rem;
+}
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+svg {
+  display: inline-block;
+}

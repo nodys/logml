@@ -1,0 +1,37 @@
+
+nova-logml-viewer .axis path,
+nova-logml-viewer .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+nova-logml-viewer .line {
+  fill: none;
+  stroke-width: 1.5px;
+}
+
+nova-logml-viewer .line.dotted {
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
+}
+
+nova-logml-viewer .line.dashed {
+  stroke-dasharray: 7,4;
+}
+
+nova-logml-viewer svg {
+}
+
+
+nova-logml-viewer #plot[fusion] svg {
+  display: inline-block;
+}
+
+nova-logml-viewer #plot[fusion] svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -1,0 +1,11 @@
+body {
+  overflow: auto !important;
+}
+
+header {
+  display: none !important;
+}
+
+html *[overflow] {
+  overflow: inherit !important;
+}

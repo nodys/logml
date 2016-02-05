@@ -1,0 +1,318 @@
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+/* Global layout */
+*[ellipsis] {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+*[color-desk] {
+  background-color: #d6d4d4;
+}
+
+*[color-white] {
+  background-color: #ffffff;
+}
+
+*[overflow] {
+  overflow: auto;
+}
+
+*[nooverflow] {
+  overflow: hidden;
+}
+
+*[unselectable] {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+*[selectable] {
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+}
+
+*[layout][horizontal][border] > *:not(*:last-child) {
+  border-right: 1px solid #ccc;
+}
+
+*[layout][vertical][border] > *:not(*:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+*[padding-light] {
+  padding: .3rem;
+  box-sizing: border-box;
+}
+
+*[padding-medium] {
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+*[padding-large] {
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+*[margin-light] {
+  margin: .3rem;
+}
+
+*[margin-medium] {
+  margin: 1rem;
+}
+
+*[margin-large] {
+  margin: 2rem;
+}
+
+/* Toolbar layout */
+
+header[toolbar] {
+  flex-shrink: 0;
+  min-height: 2rem;
+  background: #f5f5f5;
+  /*padding: .3rem .3rem;*/
+}
+
+header[toolbar] > * {
+  margin: .3rem;
+}
+
+header[toolbar][horizontal] > *[split] {
+  min-height: 2rem;
+  width: 1px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid white;
+  flex-basis: 0.000000001px;
+}
+
+header[toolbar][vertical] {
+  min-width: 2rem;
+}
+
+header[toolbar][vertical] > *[split] {
+  /*width: 100%;*/
+  height: 1px;
+  background-color: #ccc;
+  border-bottom: 1px solid white;
+}
+
+/* Flex layout */
+
+html [layout][horizontal], html [layout][vertical] {
+  display: flex;
+}
+
+html [layout][horizontal][inline], html [layout][vertical][inline] {
+  display: inline-flex;
+}
+
+html [layout][horizontal] {
+  flex-direction: row;
+}
+
+html [layout][horizontal][spaced] > *:not(*:last-child) {
+  margin-right: .3em;
+}
+
+html [layout][gutter-light] > * {
+  margin: .3rem  0rem .3rem .3rem;
+}
+
+html [layout][gutter-light] > *:last-child {
+  margin-right: .3rem;
+}
+
+html [layout][gutter-medium] > * {
+  margin: 1rem  0rem 1rem 1rem;
+}
+
+html [layout][gutter-medium] > *:last-child {
+  margin-right: 1rem;
+}
+
+html [layout][gutter-large] > * {
+  margin: 2rem 0rem 2rem 2rem;
+}
+
+html [layout][gutter-large] > *:last-child  {
+  margin-right: 2rem;
+}
+
+html [layout][horizontal][reverse] {
+  flex-direction: row-reverse;
+}
+
+html [layout][vertical] {
+  flex-direction: column;
+}
+
+html [layout][vertical][spaced] > *:not(*:last-child) {
+  margin-bottom: .3em;
+}
+
+html [layout][vertical][reverse] {
+  flex-direction: column-reverse;
+}
+
+html [layout][wrap] {
+  flex-wrap: wrap;
+}
+
+html [layout][wrap-reverse] {
+  flex-wrap: wrap-reverse;
+}
+
+html [flex] {
+  flex: 1;
+  flex-basis: 0.000000001px;
+}
+
+html [unshrinkable] {
+  flex-shrink: 0;
+}
+
+html [vertical][layout] > [flex][auto-vertical], html [vertical][layout] [flex][auto-vertical] {
+  flex-basis: auto;
+}
+
+html [layout][center], html [layout][center-center] {
+  align-items: center;
+}
+
+html [relative] {
+  position: relative;
+}
+
+html [fit] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+html [overflow] {
+  overflow: auto;
+}
+
+/* nova-button component (light version) */
+nova-button {
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: .8rem;
+  margin: 0;
+  min-height: 2rem;
+  min-width: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 0em 1rem;
+}
+
+nova-button[left] {
+  justify-content: flex-start;
+}
+
+nova-button[right] {
+  justify-content: flex-end;
+}
+
+nova-button[disabled] {
+  cursor: default;
+}
+
+nova-button[outlined][disabled]:focus,
+nova-button[outlined][disabled]:hover,
+nova-button[outlined][disabled]:active,
+nova-button[outlined] {
+  box-shadow: 0 0 3px rgba(0,0,0,.05);
+  color: #666;
+  transition: background 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+nova-button[outlined][disabled]:hover,
+nova-button[outlined][disabled]:active,
+nova-button[outlined][disabled]:focus,
+nova-button[outlined][disabled] {
+  color: #aaa;
+}
+
+nova-button[outlined]:hover,
+nova-button[outlined]:focus {
+  box-shadow: 0 0 .3rem rgba(0,0,0,.3);
+  outline: none;
+  color: #333;
+}
+
+nova-button[outlined]:focus {
+  outline: 1px solid rgba(255, 255, 255, .6);
+  outline-offset: 1px;
+  box-shadow: 0 0 8px rgba(0,0,0,.4);
+}
+
+nova-button[outlined]:active {
+  color: #008ABE;
+}
+
+nova-button[colored] {
+  background-color: #008ABE;
+  background-image: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, .2));
+  color: white;
+  text-shadow: 0 0 2px rgba(0,0,0,.5)
+}
+
+nova-button[colored]:active,
+nova-button[colored][activated] {
+  background-image: linear-gradient(to top, transparent 40%, rgba(0, 0, 0, .2));
+}
+
+
+nova-button[colored][disabled] {
+  background: #aaa;
+  text-shadow:none;
+}
+
+nova-button[colored]:focus {
+  text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+  outline: 1px solid rgba(255, 255, 255, .6);
+  outline-offset: -2px;
+}
+
+nova-button[disabled]:focus {
+  outline: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+nova-button[activated]:focus,
+nova-button[activated] {
+  box-shadow: inset 1px 1px 4px rgba(0,0,0,.4), 0px 0px 1px white;
+  color: #333;
+}
+
+nova-button[activated][colored]:focus,
+nova-button[activated][colored] {
+  color: white;
+}
+
+nova-button[activated][outlined]:focus,
+nova-button[activated][outlined] {
+  color: #fff;
+  background: #008ABE;
+}
