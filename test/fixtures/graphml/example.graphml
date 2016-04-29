@@ -132,7 +132,7 @@
       <data key="d4"/>
       <data key="d5"><![CDATA[v0=0
 pwd=5
-int=0,100]]></data>
+int=20,60]]></data>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="143.474609375" x="666.2308426794532" y="240.78301941378072"/>

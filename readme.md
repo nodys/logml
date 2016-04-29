@@ -71,12 +71,81 @@ We use for that the [yED graph editor](https://www.yworks.com/downloads#yEd) (wh
 
 ![](http://nodys.github.io/logml/images/Graphical_ontology.png)
 
+Please find bellow an example of a logical graph, which will be used throughout this tutorial:
 
 ![](http://nodys.github.io/logml/images/example.png)
 
 In order to ensure the proper functioning of Logml tool, the following instructions must be observed carefully during the creation of the logical graph in [yED](https://www.yworks.com/products/yed).
 
+#### Annotation of nodes
 
+Each node of the graph (entity) need to be annotated (in yED, right click on the node > `properties` > `data`) with its qualitative initial values (integers only, and between 0 and 5). The node initial states are defined as following:
+
+| Annotation | Meaning   |
+|:-----------|:----------|
+| `v0=5`     | full      |
+| `v0=4`     | much more |
+| `v0=3`     | much      |
+| `v0=2`     | few       |
+| `v0=1`     | fewer     |
+| `v0=0`     | none      |
+
+Please find below an example of node annotation:
+
+![](http://nodys.github.io/logml/images/node-annotation.png)
+
+#### Annotation of edges
+
+Each edge need to be annotated (in yED, right click on the edge > `properties` > `general`) with its `p` value and its `q` value (integers only, and between 0 and 5).
+
++ For each edges, `p` is the portion of its value which is updated at each iteration:
+
+| Annotation | Meaning       |
+|:-----------|:--------------|
+| `p=5`      | instantaneous |
+| `p=4`      | faster        |
+| `p=3`      | fast          |
+| `p=2`      | slow          |
+| `p=1`      | slower        |
+| `p=0`      | down          |
+
++ For each edges, `q` is the the weakening of its value at each iteration:
+
+| Annotation | Meaning |
+|:-----------|:--------|
+| `q=5`      | strong  |
+| `q=4`      | weaker  |
+| `q=3`      | weak    |
+| `q=2`      | faint   |
+| `q=1`      | fainter |
+| `q=0`      | down    |
+
+Please find below an example of edge annotation:
+
+![](http://nodys.github.io/logml/images/edge-annotation.png)
+
+#### Annotation of perturbed nodes
+
+Identify nodes that will be the subject of a disturbance by annotating (in yED, right click on the entity > `properties` > `data`) with:
+
++ the strength of the disturbance applied to the node. The disturbed states will be defined as following (integers only, and between 0 and 5):
+
+| Annotation | Meaning   |
+|:-----------|:----------|
+| `pwd=5`    | full      |
+| `pwd=4`    | much more |
+| `pwd=3`    | much      |
+| `pwd=2`    | few       |
+| `pwd=1`    | fewer     |
+| `pwd=0`    | none      |
+
++ the interval of iterations at which disturbances begin and end respectively. The intervals will be defined as following (integers only, and between 0 and 100):
+
+`int=20,60`: in this case, perturbations will start after 20% of iterations, and will stop after 60% of iterations.
+
+An example is presented in the following screenshot:
+
+![](http://nodys.github.io/logml/images/pert-nodes-annotation.png)
 
 ### Run Logml
 
