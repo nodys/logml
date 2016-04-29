@@ -30,6 +30,318 @@
       <section>
         <h1>
 <a id="logml" class="anchor" href="#logml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Logml</h1>
+
+<p><a href="https://github.com/feross/standard"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="js-standard-style"></a>
+<a href="https://npmjs.org/package/logml"><img src="https://img.shields.io/npm/v/logml.svg?style=flat" alt="npm"></a>
+<a href="https://npmjs.org/package/logml"><img src="https://img.shields.io/npm/dm/logml.svg?style=flat" alt="downloads"></a></p>
+
+<p>Logml is a logical modelling framework based on the Boolean network theory where classic Boolean operators are replaced with fuzzy operators and where edges are  tuned  in  order  to  adapt  the  speed  and  the strength  of  the  signal  that  they transmit.</p>
+
+<p>This tool is an adaptation of a methodology developed at <a href="http://www.novadiscovery.com/">Novadiscovery</a> and freely accessible at:</p>
+
+<p><a href="https://arxiv.org/abs/1407.1135v5">Poret, A., Monteiro Sousa, C., Boissel, J.-P.: Enhancing boolean networks with fuzzy operators and edge tuning.arXiv:1407.1135 (2014)</a></p>
+
+<h2>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table of contents</h2>
+
+<pre><code>- [Installation](#installation)
+    - [Requirements](#requirements)
+        - [Fortran](#fortran)
+        - [NodeJS](#nodejs)
+        - [Logml](#logml)
+- [Usage](#usage)
+    - [Logical graph](#logical-graph)
+        - [Annotation of nodes](#annotation-of-nodes)
+        - [Annotation of edges](#annotation-of-edges)
+        - [Annotation of perturbed nodes](#annotation-of-perturbed-nodes)
+    - [Run Logml](#run-logml)
+- [Example](#example)
+</code></pre>
+
+<hr>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h3>
+
+<ul>
+<li><a href="https://gcc.gnu.org/wiki/GFortranDistros">Fortran</a></li>
+<li><a href="https://nodejs.org">NodeJS</a></li>
+</ul>
+
+<h4>
+<a id="fortran" class="anchor" href="#fortran" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fortran</h4>
+
+<p><strong>For Linux</strong>, install <a href="https://gcc.gnu.org/wiki/GFortranDistros">gfortran</a></p>
+
+<div class="highlight highlight-source-shell"><pre>sudo apt-get update
+sudo apt-get install gfortran</pre></div>
+
+<p><strong>For OSX</strong>, Check that <code>gcc</code> (that comes with gfortran) has been correctly
+installed. If not, install it via brew:</p>
+
+<div class="highlight highlight-source-shell"><pre>brew install gcc</pre></div>
+
+<h4>
+<a id="nodejs" class="anchor" href="#nodejs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NodeJS</h4>
+
+<p>Just install the last stable version from <a href="https://nodejs.org">https://nodejs.org</a>, or use <a href="https://github.com/creationix/nvm">Node Version Manager</a></p>
+
+<h4>
+<a id="logml-1" class="anchor" href="#logml-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Logml</h4>
+
+<p>To install Logml, just run the following command :</p>
+
+<div class="highlight highlight-source-shell"><pre>npm install -g logml</pre></div>
+
+<p>Now you can use the <code>logml</code> command:</p>
+
+<div class="highlight highlight-source-shell"><pre>logml --help</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>The Logml modelling and simulation tool takes a logical graph (.graphml format) as input. The tool will automatically parse the graph and generate the corresponding code. The logical model is then executed and results are plotted via a dedicated web interface.</p>
+
+<h3>
+<a id="logical-graph" class="anchor" href="#logical-graph" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Logical graph</h3>
+
+<p>A logical graph is a special type of diagramatic structure in which entities are linked by logical relations symbolized by the logic operators: <code>AND</code>, <code>OR</code> and <code>NOT</code>.</p>
+
+<p>We use for that the <a href="https://www.yworks.com/downloads#yEd">yED graph editor</a> (which is freely available and runs on all major platforms), and the <a href="test/fixtures/graphml/graphical_ontology.graphml">following graphical ontology</a>:</p>
+
+<p><img src="http://nodys.github.io/logml/images/Graphical_ontology.png" alt=""></p>
+
+<p>Please find bellow an example of a logical graph, which will be used throughout this tutorial:</p>
+
+<p><img src="http://nodys.github.io/logml/images/example.png" alt=""></p>
+
+<p>In order to ensure the proper functioning of Logml tool, the following instructions must be observed carefully during the creation of the logical graph in <a href="https://www.yworks.com/products/yed">yED</a>.</p>
+
+<h4>
+<a id="annotation-of-nodes" class="anchor" href="#annotation-of-nodes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Annotation of nodes</h4>
+
+<p>Each node of the graph (entity) need to be annotated (in yED, right click on the node &gt; <code>properties</code> &gt; <code>data</code>) with its qualitative initial values (integers only, and between 0 and 5). The node initial states are defined as following:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Annotation</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>v0=5</code></td>
+<td align="left">full</td>
+</tr>
+<tr>
+<td align="left"><code>v0=4</code></td>
+<td align="left">much more</td>
+</tr>
+<tr>
+<td align="left"><code>v0=3</code></td>
+<td align="left">much</td>
+</tr>
+<tr>
+<td align="left"><code>v0=2</code></td>
+<td align="left">few</td>
+</tr>
+<tr>
+<td align="left"><code>v0=1</code></td>
+<td align="left">fewer</td>
+</tr>
+<tr>
+<td align="left"><code>v0=0</code></td>
+<td align="left">none</td>
+</tr>
+</tbody>
+</table>
+
+<p>Please find below an example of node annotation:</p>
+
+<p><img src="http://nodys.github.io/logml/images/node-annotation.png" alt=""></p>
+
+<h4>
+<a id="annotation-of-edges" class="anchor" href="#annotation-of-edges" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Annotation of edges</h4>
+
+<p>Each edge need to be annotated (in yED, right click on the edge &gt; <code>properties</code> &gt; <code>general</code>) with its qualitative <code>p</code> and <code>q</code> values (integers only, and between 0 and 5).</p>
+
+<ul>
+<li>For each edges, <code>p</code> is the portion of its value which is updated at each iteration:</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">Annotation</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>p=5</code></td>
+<td align="left">instantaneous</td>
+</tr>
+<tr>
+<td align="left"><code>p=4</code></td>
+<td align="left">faster</td>
+</tr>
+<tr>
+<td align="left"><code>p=3</code></td>
+<td align="left">fast</td>
+</tr>
+<tr>
+<td align="left"><code>p=2</code></td>
+<td align="left">slow</td>
+</tr>
+<tr>
+<td align="left"><code>p=1</code></td>
+<td align="left">slower</td>
+</tr>
+<tr>
+<td align="left"><code>p=0</code></td>
+<td align="left">down</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>For each edges, <code>q</code> is the weakening of its value at each iteration:</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">Annotation</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>q=5</code></td>
+<td align="left">strong</td>
+</tr>
+<tr>
+<td align="left"><code>q=4</code></td>
+<td align="left">weaker</td>
+</tr>
+<tr>
+<td align="left"><code>q=3</code></td>
+<td align="left">weak</td>
+</tr>
+<tr>
+<td align="left"><code>q=2</code></td>
+<td align="left">faint</td>
+</tr>
+<tr>
+<td align="left"><code>q=1</code></td>
+<td align="left">fainter</td>
+</tr>
+<tr>
+<td align="left"><code>q=0</code></td>
+<td align="left">down</td>
+</tr>
+</tbody>
+</table>
+
+<p>Please find below an example of edge annotation:</p>
+
+<p><img src="http://nodys.github.io/logml/images/edge-annotation.png" alt=""></p>
+
+<h4>
+<a id="annotation-of-perturbed-nodes" class="anchor" href="#annotation-of-perturbed-nodes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Annotation of perturbed nodes</h4>
+
+<p>We can identify nodes that will be the subject of a disturbance by annotating (in yED, right click on the entity &gt; <code>properties</code> &gt; <code>data</code>) with:</p>
+
+<ul>
+<li>the strength of the disturbance applied to the node. The disturbed states will be defined as following (integers only, and between 0 and 5):</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">Annotation</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>pwd=5</code></td>
+<td align="left">full</td>
+</tr>
+<tr>
+<td align="left"><code>pwd=4</code></td>
+<td align="left">much more</td>
+</tr>
+<tr>
+<td align="left"><code>pwd=3</code></td>
+<td align="left">much</td>
+</tr>
+<tr>
+<td align="left"><code>pwd=2</code></td>
+<td align="left">few</td>
+</tr>
+<tr>
+<td align="left"><code>pwd=1</code></td>
+<td align="left">fewer</td>
+</tr>
+<tr>
+<td align="left"><code>pwd=0</code></td>
+<td align="left">none</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>the interval of iterations at which disturbances begin and end respectively. The intervals will be defined as following (integers only, and between 0 and 100):</li>
+</ul>
+
+<p><code>int=20,60</code>: in this case, perturbations will start after 20% of iterations, and will stop after 60% of iterations.</p>
+
+<p>An example of disturbance annotation is presented in the following screenshot:</p>
+
+<p><img src="http://nodys.github.io/logml/images/pert-nodes-annotation.png" alt=""></p>
+
+<h3>
+<a id="run-logml" class="anchor" href="#run-logml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Run Logml</h3>
+
+<div class="highlight highlight-source-shell"><pre>logml --help
+
+    Usage: logml <span class="pl-k">&lt;</span>input<span class="pl-k">&gt;</span>
+
+    Options:
+
+      -h, --help             Output usage information
+      -V, --version          Output the version number
+      -d, --dolphin          Output an human readable version of the parsed graph
+      -i, --iterations <span class="pl-k">&lt;</span>n<span class="pl-k">&gt;</span>   The number of iterations performed during a run
+      -o, --output <span class="pl-k">&lt;</span>folder<span class="pl-k">&gt;</span>  The output folder
+      -w, --watch            Watch <span class="pl-k">for</span> any changes and update the output (<span class="pl-k">if</span> input is a file)
+      -v, --verbose          Print out informations on build (activate --verbose)
+      -s, --server [port]    Create a plotting server (activate --verbose)
+      -p, --open             Open url on start
+      -f --faster            Prevent some size optimisation, faster, bigger (stronger)
+      --silent               Prevent verbose mode</pre></div>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<p>We used the following Logml command with the <code>example.graphml</code>:</p>
+
+<div class="highlight highlight-source-shell"><pre>logml example.graphml -o ./tmp -wsvp</pre></div>
+
+<p>And we obtained the following output result:</p>
+
+<p><img src="http://nodys.github.io/logml/images/plot.png" alt=""></p>
+
+<hr>
+
+<p>License: <a href="./LICENSE">MIT</a> - Novadiscovery</p>
+
+<p><a href="https://github.com/feross/standard"><img src="https://cdn.rawgit.com/feross/standard/master/badge.svg" alt="js-standard-style"></a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/nodys">nodys</a></p>
