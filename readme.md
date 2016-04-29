@@ -96,7 +96,7 @@ Please find below an example of node annotation:
 
 #### Annotation of edges
 
-Each edge need to be annotated (in yED, right click on the edge > `properties` > `general`) with its `p` value and its `q` value (integers only, and between 0 and 5).
+Each edge need to be annotated (in yED, right click on the edge > `properties` > `general`) with its qualitative `p` and `q` values (integers only, and between 0 and 5).
 
 + For each edges, `p` is the portion of its value which is updated at each iteration:
 
@@ -109,7 +109,7 @@ Each edge need to be annotated (in yED, right click on the edge > `properties` >
 | `p=1`      | slower        |
 | `p=0`      | down          |
 
-+ For each edges, `q` is the the weakening of its value at each iteration:
++ For each edges, `q` is the weakening of its value at each iteration:
 
 | Annotation | Meaning |
 |:-----------|:--------|
@@ -126,7 +126,7 @@ Please find below an example of edge annotation:
 
 #### Annotation of perturbed nodes
 
-Identify nodes that will be the subject of a disturbance by annotating (in yED, right click on the entity > `properties` > `data`) with:
+We can identify nodes that will be the subject of a disturbance by annotating (in yED, right click on the entity > `properties` > `data`) with:
 
 + the strength of the disturbance applied to the node. The disturbed states will be defined as following (integers only, and between 0 and 5):
 
@@ -143,7 +143,7 @@ Identify nodes that will be the subject of a disturbance by annotating (in yED, 
 
 `int=20,60`: in this case, perturbations will start after 20% of iterations, and will stop after 60% of iterations.
 
-An example is presented in the following screenshot:
+An example of disturbance annotation is presented in the following screenshot:
 
 ![](http://nodys.github.io/logml/images/pert-nodes-annotation.png)
 
@@ -169,11 +169,17 @@ logml --help
       --silent               Prevent verbose mode
 ```
 
-## Exemple
+## Example
+
+We used the following Logml command with the `example.graphml`:
 
 ```bash
-logml mylogicalgraph.graphml -o ./tmp -wsvp
+logml example.graphml -o ./tmp -wsvp
 ```
+
+And we obtained the following output result:
+
+![](http://nodys.github.io/logml/images/plot.png)
 
 ---
 
