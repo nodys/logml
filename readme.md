@@ -16,18 +16,18 @@ This tool is an adaptation of a methodology developed at [Novadiscovery](http://
 
 ## Table of contents
 
-	- [Installation](#installation)
-		- [Requirements](#requirements)
-			- [Fortran](#fortran)
-			- [NodeJS](#nodejs)
-			- [Logml](#logml)
-	- [Usage](#usage)
-		- [Logical graph](#logical-graph)
-			- [Annotation of nodes](#annotation-of-nodes)
-			- [Annotation of edges](#annotation-of-edges)
-			- [Annotation of perturbed nodes](#annotation-of-perturbed-nodes)
-		- [Run Logml](#run-logml)
-	- [Example](#example)
+- [Installation](#installation)
+	- [Requirements](#requirements)
+		- [Fortran](#fortran)
+		- [NodeJS](#nodejs)
+		- [Logml](#logml)
+- [Usage](#usage)
+	- [Logical graph](#logical-graph)
+		- [Annotation of nodes](#annotation-of-nodes)
+		- [Annotation of edges](#annotation-of-edges)
+		- [Annotation of perturbed nodes](#annotation-of-perturbed-nodes)
+	- [Run Logml](#run-logml)
+- [Example](#example)
 
 ---
 
