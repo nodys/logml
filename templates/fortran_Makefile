@@ -38,7 +38,7 @@ LIB         = ./
 all: data
 
 # Generate ./bin folder if not present
-$(BIN)/:
+$(BIN):
 	@mkdir -p bin
 
 # Compile the libraries containing constants & functions used by the logical model
