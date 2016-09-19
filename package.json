@@ -1,7 +1,7 @@
 {
   "name": "logml",
   "description": "Development of an integrated logical modelling tool from the beginning steps of logical graph modelling to the final simulations outputs.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Jean Ponchon <jean.ponchon@novadiscovery.com>",
   "contributors": [
     "Claudio Monteiro Sousa <claudio.monteiro@novadiscovery.com>",
