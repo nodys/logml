@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v1.0.3 - Colorful Turtle (2016-09-19) 
+----------------------------------------------------------------------
+
+  - fix: Typo on Makefile template with invalid leading slash char on bin target
+
+
 v1.0.2 - Wise Kitten (2016-02-09) 
 ----------------------------------------------------------------------
 
