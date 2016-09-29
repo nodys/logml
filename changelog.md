@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v2.0.0 - Crapulous Wolf (2016-09-29) 
+----------------------------------------------------------------------
+
+  - fix: Missing input options in server mode
+  - feat: Allow inputing vector from virtual population
+
+
 v1.0.4 - Lovable Elephant (2016-09-19) 
 ----------------------------------------------------------------------
 
