@@ -19,6 +19,10 @@ program
   .option('-s, --server [port]', 'Create a plotting server (activate --verbose)')
   .option('-p, --open', 'Open url on start')
   .option('-f --faster', 'Prevent some size optimisation, faster, bigger (stronger)')
+  .option('--output-edge', 'Output default vpop edges to csv stream')
+  .option('--output-node', 'Output default vpop nodes to csv stream')
+  .option('--input-edge <string>', 'Input vpop edges from csv file')
+  .option('--input-node <string>', 'Input vpop nodes from csv file')
   .option('--silent', 'Prevent verbose mode')
 
 program.parse(process.argv)
@@ -89,10 +93,16 @@ function run () {
   }
   var options = {
     iterations: program.iterations,
-    output: program.output
+    output: program.output,
+    inputNode: program.inputNode,
+    inputEdge: program.inputEdge
   }
-  if (program.dolphin || !program.output) {
-    console.log(graphml2dolphin(graphml, options))
+  if (program.outputEdge) {
+    console.log(graphml2EdgeCsv(graphml, options))
+  } else if (program.outputNode) {
+    console.log(graphml2NodeCsv(graphml, options))
+  } else if (program.dolphin || !program.output) {
+    console.log(graphml2Dolphin(graphml, options))
   } else {
     debug('Generate model ./%s -> ./%s/',
       path.relative(process.cwd(), inputPath),
@@ -101,9 +111,19 @@ function run () {
   }
 }
 
-function graphml2dolphin (graphml, options) {
+function graphml2Dolphin (graphml, options) {
   var graph = Graph.parse(graphml)
   return graph.format(new logml.FormatterCli(options))
+}
+
+function graphml2EdgeCsv (graphml, options) {
+  var graph = Graph.parse(graphml)
+  return graph.format(new logml.FormatterEdgeCsv(options))
+}
+
+function graphml2NodeCsv (graphml, options) {
+  var graph = Graph.parse(graphml)
+  return graph.format(new logml.FormatterNodeCsv(options))
 }
 
 if (program.server) {

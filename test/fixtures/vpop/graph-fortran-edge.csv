@@ -1,0 +1,9 @@
+id,p,q
+EDGE_PIP2__PIP3,42,43
+EDGE_PI3K__PIP2,3,3
+EDGE_Insulin_receptor_substrat_1__PI3K,4,3
+EDGE_anti_PI3K__PI3K,4,3
+EDGE_Insulin_receptor__Insulin_receptor_substrat_1,3,3
+EDGE_Insulin_like_GF1_receptor__Insulin_receptor_substrat_1,3,3
+EDGE_Insulin_like_growth_factor_1__Insulin_like_GF1_receptor,4,3
+EDGE_Insulin__Insulin_receptor,4,3

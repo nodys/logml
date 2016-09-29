@@ -172,17 +172,21 @@ logml --help
 
     Options:
 
-      -h, --help             Output usage information
-      -V, --version          Output the version number
-      -d, --dolphin          Output an human readable version of the parsed graph
-      -i, --iterations <n>   The number of iterations performed during a run
-      -o, --output <folder>  The output folder
-      -w, --watch            Watch for any changes and update the output (if input is a file)
-      -v, --verbose          Print out informations on build (activate --verbose)
-      -s, --server [port]    Create a plotting server (activate --verbose)
-      -p, --open             Open url on start
-      -f --faster            Prevent some size optimisation, faster, bigger (stronger)
-      --silent               Prevent verbose mode
+		-h, --help             output usage information
+    -V, --version          output the version number
+    -d, --dolphin          Output an human readable version of the parsed graph
+    -i, --iterations <n>   The number of iterations performed during a run
+    -o, --output <folder>  The output folder
+    -w, --watch            Watch for any changes and update the output (if input is a file)
+    -v, --verbose          Print out informations on build (activate --verbose)
+    -s, --server [port]    Create a plotting server (activate --verbose)
+    -p, --open             Open url on start
+    -f --faster            Prevent some size optimisation, faster, bigger (stronger)
+    --output-edge          Output default vpop edges to csv stream
+    --output-node          Output default vpop nodes to csv stream
+    --input-edge <string>  Input vpop edges from csv file
+    --input-node <string>  Input vpop nodes from csv file
+    --silent               Prevent verbose mode
 ```
 
 ## Example

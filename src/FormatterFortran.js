@@ -57,6 +57,28 @@ class Fortran extends Formatter {
     }
   }
 
+  getNodeValue (key, node) {
+    let value = node[key]
+    if (this.options.inputNode) {
+      let altNode = this.options.inputNode.find(n => n.id === node.cid)
+      if (altNode && (typeof altNode[key] !== 'undefined')) {
+        value = altNode[key]
+      }
+    }
+    return value
+  }
+
+  getEdgeValue (key, edge) {
+    let value = edge[key]
+    if (this.options.inputEdge) {
+      let altEdge = this.options.inputEdge.find(n => n.id === edge.cid)
+      if (altEdge && (typeof altEdge[key] !== 'undefined')) {
+        value = altEdge[key]
+      }
+    }
+    return value
+  }
+
   graph (graph, formatter) {
     var equations = graph.entities.map(e => e.getEquation())
     var edges = this.edges = []
@@ -85,31 +107,31 @@ class Fortran extends Formatter {
 
     var initialValues = nodes.map((node, index) => [
       node.format(this),
-      node.initialValue + ' / int_convert'
+      this.getNodeValue('initialValue', node) + ' / int_convert'
     ])
 
     var pert_pws = nodes.map((node, index) => [
       'pert_pw(' + node.cid + ')',
-      node.perturbationPwd + ' / int_convert'
+      this.getNodeValue('pwd', node) + ' / int_convert'
     ])
     var pert_inits = nodes.map((node, index) => [
       'pert_init(' + node.cid + ')',
-      node.pertInterval[0] + ' * it_convert'
+      this.getNodeValue('pertStart', node) + ' * it_convert'
     ])
 
     var pert_ends = nodes.map((node, index) => [
       'pert_end(' + node.cid + ')',
-      node.pertInterval[1] + ' * it_convert'
+      this.getNodeValue('pertEnd', node) + ' * it_convert'
     ])
 
     var ps = edges.map((edge, index) => [
       'p(' + edge.cid + ')',
-      edge.p + ' / int_convert'
+      this.getEdgeValue('p', edge) + ' / int_convert'
     ])
 
     var qs = edges.map((edge, index) => [
       'q(' + edge.cid + ')',
-      edge.q + ' / int_convert'
+      this.getEdgeValue('q', edge) + ' / int_convert'
     ])
 
     var results = {}

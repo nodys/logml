@@ -37,6 +37,20 @@ describe('logml()', function () {
         expect(result.cu_logical).to.eql(readfix('expected/Fortran/src/cu_logical.f95'))
         expect(result.makefile).to.eql(readfix('expected/Fortran/src/Makefile'))
       })
+
+      it('should build fortran sources with edge inputs', function () {
+        var graph = Graph.parse(readfix('graphml/graph-fortran.graphml'))
+        var result = graph.format(new logml.FormatterFortran({
+          iterations: 100,
+          inputEdge: logml.parseCsvInput(fixp('vpop/graph-fortran-edge.csv')),
+          inputNode: logml.parseCsvInput(fixp('vpop/graph-fortran-node.csv'))
+        }))
+        expect(result.constants).to.eql(readfix('expected/FortranInput/src/constants.f95'))
+        expect(result.upd_nodes).to.eql(readfix('expected/FortranInput/src/upd_nodes.f95'))
+        expect(result.upd_edges).to.eql(readfix('expected/FortranInput/src/upd_edges.f95'))
+        expect(result.cu_logical).to.eql(readfix('expected/FortranInput/src/cu_logical.f95'))
+        expect(result.makefile).to.eql(readfix('expected/FortranInput/src/Makefile'))
+      })
     })
   })
 })

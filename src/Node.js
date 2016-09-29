@@ -39,11 +39,23 @@ class Node {
     return parseInt(result[1], 10)
   }
 
+  get pwd () {
+    return this.perturbationPwd
+  }
+
   get pertInterval () {
     if (!this.desc) return [0, 0]
     var result = /int\s*=\s*([\d]+\,[\d]+)/.exec(this.desc)
     result = result ? result[1] : '0,0'
     return result.split(',').map(v => parseInt(v, 10))
+  }
+
+  get pertStart () {
+    return this.pertInterval[0]
+  }
+
+  get pertEnd () {
+    return this.pertInterval[1]
   }
 
   get p () {
