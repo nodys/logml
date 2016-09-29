@@ -15,7 +15,7 @@ class FormatterNodeCsv extends Formatter {
           node.pertInterval[1]
         ])
       })
-      return output.map(row => row.join(',')).join('\n')
+      return output.map(row => row.join(';')).join('\n')
     }
 }
 
