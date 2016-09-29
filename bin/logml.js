@@ -136,7 +136,9 @@ if (program.server) {
     output: program.output,
     filepath: getInputPath(),
     watch: program.watch,
-    verbose: program.verbose
+    verbose: program.verbose,
+    inputNode: program.inputNode,
+    inputEdge: program.inputEdge
   }
   if (program.faster) {
     conf.minifyify = false

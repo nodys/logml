@@ -15,10 +15,7 @@ npm-debug.log
 
 
 /build
-/sandbox/src/build
-# octave temp files
-
-octave-workspace
+/sandbox
 
 # ignore data generated files
 .dat
