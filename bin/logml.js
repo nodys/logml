@@ -7,13 +7,17 @@ const chokidar = require('chokidar')
 const clc = require('cli-color')
 const open = require('open')
 const path = require('path')
+const spawn = require('child_process').spawn
+const tempfile = require('tempfile')
+const mkdirp = require('mkdirp')
 
 program
   .usage('<input>')
   .version(require('../package.json').version)
   .option('-d, --dolphin', 'Output an human readable version of the parsed graph')
   .option('-i, --iterations <n>', 'The number of iterations performed during a run', parseInt)
-  .option('-o, --output <folder>', 'The output folder')
+  .option('-o, --output <folder>', 'The output folder for the fortran sources')
+  .option('-r, --run', 'Print out computation results to csv stream')
   .option('-w, --watch', 'Watch for any changes and update the output (if input is a file)')
   .option('-v, --verbose', 'Print out informations on build (activate --verbose)')
   .option('-s, --server [port]', 'Create a plotting server (activate --verbose)')
@@ -94,20 +98,33 @@ function run () {
   var options = {
     iterations: program.iterations,
     output: program.output,
+    run: program.run,
     inputNode: program.inputNode,
     inputEdge: program.inputEdge
   }
+
   if (program.outputEdge) {
     console.log(graphml2EdgeCsv(graphml, options))
   } else if (program.outputNode) {
     console.log(graphml2NodeCsv(graphml, options))
-  } else if (program.dolphin || !program.output) {
+  } else if (program.dolphin) {
     console.log(graphml2Dolphin(graphml, options))
-  } else {
+  } else if (options.output || options.run) {
+    if (!options.output) {
+      // Use random output folder
+      options.output = tempfile('')
+      mkdirp.sync(options.output)
+    }
+
     debug('Generate model ./%s -> ./%s/',
       path.relative(process.cwd(), inputPath),
-      path.relative(process.cwd(), program.output))
-    logml.graphml2fortran(graphml, program.output, options)
+      path.relative(process.cwd(), options.output))
+    logml.graphml2fortran(graphml, options.output, options)
+      .then(() => {
+        if (options.run) {
+          spawn('make', { cwd: path.resolve(options.output) }).stdout.pipe(process.stdout)
+        }
+      })
   }
 }
 
