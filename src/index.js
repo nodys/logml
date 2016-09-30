@@ -49,7 +49,7 @@ logml.parseCsvInput = function (filepath) {
   var raw = fs.readFileSync(filepath, 'utf8').trim() // TODO: Refactor / catch errors
 
   // Basic csv parser...
-  var matrix = raw.split('\n').map(row => row.trim().split(';'))
+  var matrix = raw.split('\n').map(row => row.trim().split(','))
 
   // Read headers
   var headers = matrix[0].map(key => key.trim())

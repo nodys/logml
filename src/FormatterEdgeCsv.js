@@ -12,7 +12,7 @@ class FormatterEdgeCsv extends Formatter {
           })
         }
       })
-      return output.map(row => row.join(';')).join('\n')
+      return output.map(row => row.join(',')).join('\n')
     }
 }
 
