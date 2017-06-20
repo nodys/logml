@@ -18,7 +18,7 @@
 # -c                      : option is needed to compile a file without linking
 # -J                      : option tells where to put the compiled modules
 # -I                      : option tells where to find the compiled modules
-COMPILE  = @gfortran -Ofast -ggdb -Wall -fmax-errors=1 -Werror -ffree-form -ffree-line-length-none -pedantic
+COMPILE  = @gfortran -Ofast -ggdb -Wall -fmax-errors=1 -ffree-form -ffree-line-length-none -pedantic
 #COMPILE_NO_WARNING = @gfortran -Ofast -ggdb -w -fmax-errors=1 -Werror -ffree-form -ffree-line-length-none
 
 
